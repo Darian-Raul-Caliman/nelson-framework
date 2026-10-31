@@ -67,6 +67,18 @@
       <Filter>Nelson</Filter>
     </ClInclude>
     <ClInclude Include="src\nspch.h" />
+    <ClInclude Include="KeyCodes.h">
+      <Filter>Nelson</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Nelson\MouseButtonCodes.h">
+      <Filter>Nelson</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Nelson\Platform\Windows\WindowsInput.h">
+      <Filter>Nelson\Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Nelson\Input.h">
+      <Filter>Nelson</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Nelson\Application.cpp">

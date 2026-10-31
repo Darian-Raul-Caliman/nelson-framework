@@ -152,6 +152,9 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Nelson\Input.h" />
+    <ClInclude Include="KeyCodes.h" />
+    <ClInclude Include="src\Nelson\MouseButtonCodes.h" />
     <ClInclude Include="src\Nelson\Application.h" />
     <ClInclude Include="src\Nelson\Core.h" />
     <ClInclude Include="src\Nelson\EntryPoint.h" />
@@ -168,6 +171,7 @@
     <ClInclude Include="src\Nelson\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\Nelson\Window.h" />
     <ClInclude Include="src\nspch.h" />
+    <ClInclude Include="src\Nelson\Platform\Windows\WindowsInput.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Nelson\Application.cpp" />
