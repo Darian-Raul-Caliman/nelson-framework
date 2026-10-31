@@ -154,6 +154,7 @@
   <ItemGroup>
     <ClInclude Include="src\Nelson\Input.h" />
     <ClInclude Include="KeyCodes.h" />
+    <ClInclude Include="src\Nelson\KeyCodes.h" />
     <ClInclude Include="src\Nelson\MouseButtonCodes.h" />
     <ClInclude Include="src\Nelson\Application.h" />
     <ClInclude Include="src\Nelson\Core.h" />

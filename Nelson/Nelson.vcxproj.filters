@@ -79,6 +79,7 @@
     <ClInclude Include="src\Nelson\Input.h">
       <Filter>Nelson</Filter>
     </ClInclude>
+    <ClInclude Include="src\Nelson\KeyCodes.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Nelson\Application.cpp">
