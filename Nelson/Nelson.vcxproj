@@ -181,6 +181,7 @@
     <ClCompile Include="src\Nelson\LayersStack.cpp" />
     <ClCompile Include="src\Nelson\Log.cpp" />
     <ClCompile Include="src\Nelson\Platform\OpenGL\ImGuiOpenGLRenderer.cpp" />
+    <ClCompile Include="src\Nelson\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Nelson\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\nspch.cpp">
       <PrecompiledHeader>Create</PrecompiledHeader>

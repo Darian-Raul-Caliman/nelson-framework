@@ -106,5 +106,6 @@
       <Filter>Nelson\Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\nspch.cpp" />
+    <ClCompile Include="src\Nelson\Platform\Windows\WindowsInput.cpp" />
   </ItemGroup>
 </Project>
