@@ -25,10 +25,10 @@ include "Nelson/vendor/imGui"
 
 project "Nelson"
 	location "Nelson"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
 
-	targetdir ("bin/" .. outputdir .. "/Sandbox")
+	targetdir ("bin/" .. outputdir .. "/Nelson")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
 	pchheader "nspch.h"
 	pchsource "Nelson/src/nspch.cpp"
@@ -62,27 +62,21 @@ project "Nelson"
 
 		defines {
 			"NS_PLATFORM_WINDOWS",
-			"NS_BUILD_DLL",
 			"GLFW_INCLUDE_NONE"
 		}
 
-	postbuildcommands {
-		("{COPY} %{cfg.buildtarget.relpath} \"../bin/" .. outputdir .. "/Sandbox/\"")
-	}
+
 
 	filter "configurations:Debug"
 		defines "NS_DEBUG"
-		buildoptions "/MDd"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "NS_RELEASE"
-		buildoptions "/MD"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "NS_DIST"
-		buildoptions "/MD"
 		optimize "On"
 
 project "Sandbox"
@@ -120,15 +114,14 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		defines "NS_DEBUG"
-		buildoptions "Debug"
+
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "NS_RELEASE"
-		buildoptions "Release"
+
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "NS_DIST"
-		buildoptions "Release"
 		optimize "On"

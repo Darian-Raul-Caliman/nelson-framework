@@ -22,4 +22,3 @@ project "Glad"
 		staticruntime "On"
 
 	filter {"system:windows", "configurations:Release"}
-		buildoptions "/MT"
