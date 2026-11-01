@@ -1,21 +1,23 @@
 #include "Nelson/Nelson.h"
-
+#include "imgui.h"
 
 class ExampleLayer : public Nelson::Layer
 {
 public:
 	ExampleLayer() : Layer("Example") {};
 
-	void OnUpdate() override
-	{
-		//NS_INFO("ExampleLayer::Updated");
-		if (Nelson::Input::IsKeyPressed(Nelson::Key::Space))
-			NS_INFO("Space e apasat");
+
+	void OnUIRender() override {
+		ImGui::Begin("Nume fereastra");
+		ImGui::Text("Nelson Engine");
+		ImGui::Button("Click here");
+		ImGui::End();
+		ImGui::ShowDemoWindow();
 	}
 
 	void OnEvent(Nelson::Event& event) override
 	{
-		//NS_TRACE("{0}", event);
+
 	}
 
 
@@ -29,7 +31,6 @@ class Sandbox : public Nelson::Application {
 public:
 	Sandbox() {
 		PushLayer(new ExampleLayer());
-		PushOverlay(new Nelson::ImGuiLayer());
 	}
 	~Sandbox() {
 	}

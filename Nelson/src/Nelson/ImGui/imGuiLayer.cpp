@@ -19,23 +19,28 @@ namespace Nelson {
 	{
 
 	}
-	void ImGuiLayer::OnUpdate()
+
+
+	void ImGuiLayer::Begin()
 	{
-
 		ImGui_ImplOpenGL3_NewFrame();
-
 		ImGui_ImplGlfw_NewFrame();
-
 		ImGui::NewFrame();
+	}
 
-		static bool show = true;
-		ImGui::ShowDemoWindow(&show);
-
+	void ImGuiLayer::End()
+	{
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-		
-
 	}
+
+//	void ImGuiLayer::OnUpdate()
+//	{
+//		static bool show = true;
+//		ImGui::ShowDemoWindow(&show);
+
+
+//	}
 	void ImGuiLayer::OnAttach()
 	{
 		ImGui::CreateContext();

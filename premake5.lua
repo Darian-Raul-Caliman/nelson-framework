@@ -93,6 +93,7 @@ project "Sandbox"
 	}
 
 	includedirs {
+		"%{IncludeDir.imGui}",
 		"Nelson/vendor/spdlog/include",
 		"Nelson/src"
 	}

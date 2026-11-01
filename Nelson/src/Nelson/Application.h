@@ -5,6 +5,7 @@
 #include "Window.h"
 #include  "Nelson/Events/ApplicationEvent.h"
 #include "LayerStack.h"
+#include "Nelson/ImGui/imGuiLayer.h"
 
 namespace Nelson {
 
@@ -27,6 +28,7 @@ namespace Nelson {
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 		static Application* s_Instance;
+		ImGuiLayer* m_ImGuiLayer;
 	};
 	Application* CreateApplication();
 

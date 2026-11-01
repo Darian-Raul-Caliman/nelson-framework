@@ -11,14 +11,11 @@ namespace Nelson {
 		ImGuiLayer();
 		~ImGuiLayer();
 
-		void OnUpdate();
 		void OnEvent(Event& event);
 		void OnAttach();
 		void OnDetach();
 
-	private:
-
-
-		float m_Time = 0.0f;
+		void Begin();
+		void End();
 	};
 }
