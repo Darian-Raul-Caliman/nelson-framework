@@ -1,40 +1,46 @@
 #include "nspch.h"
-#include "WindowsInput.h"
 #include <GLFW/glfw3.h>
 #include "Nelson/Application.h"
-
+#include "Nelson/Input.h"
 
 namespace Nelson {
-	Input* Input::s_Instance = new WindowInput();
 
-	bool WindowInput::IsKeyPressedImpl(int keycode)
+	bool Input::IsKeyPressed(Keycode keycode)
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		auto state = glfwGetKey(window, keycode);
 		return state == GLFW_PRESS || state == GLFW_REPEAT;
 	}
 
-	bool WindowInput::IsMouseButtonPressedImpl(int button)
+	bool Input::IsMouseButtonPressed(MouseCode button)
 	{
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		auto state = glfwGetMouseButton(window, button);
 		return state == GLFW_PRESS;
 	}
 
-	float WindowInput::GetMouseXImpl()
+	float Input::GetMouseX()
 	{
-		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
-		double xpos, ypos;
-		glfwGetCursorPos(window, &xpos, &ypos);
-		return (float)xpos;
+
+		return GetMousePosition().first;
+
 	}
 
-	float WindowInput::GetMouseYImpl()
+	float Input::GetMouseY()
 	{
+
+		return GetMousePosition().second;
+
+
+	}
+
+	std::pair<float, float> Input::GetMousePosition() {
 		auto window = static_cast<GLFWwindow*>(Application::Get().GetWindow().GetNativeWindow());
 		double xpos, ypos;
 		glfwGetCursorPos(window, &xpos, &ypos);
-		return (float)ypos;
+		return
+		{ (float)xpos, (float)ypos
+		};
 	}
 
 

@@ -11,8 +11,8 @@ project "GLFW"
 
 	files
 	{
-		GLFW_DIR .. "include/GLFW/glfw3.h",
-		GLFW_DIR .. "include/GLFW/glfw3native.h",
+		GLFW_DIR .. "/include/GLFW/glfw3.h",
+		GLFW_DIR .. "/include/GLFW/glfw3native.h",
 		GLFW_DIR .. "/include/GLFW/glfw3native.h",
 		GLFW_DIR .. "/src/context.c",
 		GLFW_DIR .. "/src/init.c",
@@ -56,7 +56,6 @@ project "GLFW"
 			GLFW_DIR .."/src/x11_monitor.c",
 			GLFW_DIR .."/src/x11_window.c",
 			GLFW_DIR .."/src/xkb_unicode.c",
-			GLFW_DIR .."/src/posix_module.c",
 			GLFW_DIR .."/src/posix_time.c",
 			GLFW_DIR .."/src/posix_thread.c",
 			GLFW_DIR .."/src/posix_module.c",
