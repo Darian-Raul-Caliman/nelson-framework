@@ -17,7 +17,7 @@ IncludeDir["Glad"] = "Nelson/vendor/Glad/include"
 IncludeDir["imGui"] = "Nelson/vendor/imGui"
 	startproject "Sandbox"
 
-include "Nelson/vendor/GLFW"
+include "premake/GLFW.lua"
 include "Nelson/vendor/Glad"
 include "Nelson/vendor/imGui"
 
@@ -68,7 +68,7 @@ project "Nelson"
 
 
 	filter "configurations:Debug"
-		defines "NS_DEBUG"
+		defines {"NS_DEBUG", "NS_ENABLE_ASSERTS"}
 		symbols "On"
 
 	filter "configurations:Release"
@@ -113,7 +113,7 @@ project "Sandbox"
 		}
 
 	filter "configurations:Debug"
-		defines "NS_DEBUG"
+		defines {"NS_DEBUG", "NS_ENABLE_ASSERTS"}
 
 		symbols "On"
 

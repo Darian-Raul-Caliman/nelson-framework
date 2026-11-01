@@ -13,7 +13,7 @@ namespace Nelson {
 	Application* Application::s_Instance = nullptr;
 
 	Application::Application() {
-		NS_CORE_ASSERT(s_Instance, "Application already exists ! ");
+		NS_CORE_ASSERT(!s_Instance, "Application already exists ! ");
 		s_Instance = this;
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_EVENT_FN(Application::onEvent));

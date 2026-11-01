@@ -2,11 +2,16 @@
 .vs/
 bin/
 bin-int/
+[Bb]uild/
+out/
 
 # Files
-*.user
 *.vcxproj
 *.vcxproj.filters
 *.vcxproj.user
 *.sln
 *.slnx
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
