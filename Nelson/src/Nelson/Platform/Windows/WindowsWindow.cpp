@@ -48,7 +48,7 @@ namespace Nelson {
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 		NS_CORE_ASSERT(status, "Failed to initialize GLAD");
 		glfwSetWindowUserPointer(m_Window, &m_Data);
-		SetVSync(true);
+		SetVSync(false);
 
 
 		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {

@@ -1,11 +1,13 @@
 #pragma once
 
 #include "Core.h"
+#include <chrono>
 #include "Events/Event.h"
 #include "Window.h"
-#include  "Nelson/Events/ApplicationEvent.h"
+#include "Nelson/Events/ApplicationEvent.h"
 #include "LayerStack.h"
 #include "Nelson/ImGui/imGuiLayer.h"
+
 
 namespace Nelson {
 
@@ -29,6 +31,7 @@ namespace Nelson {
 		LayerStack m_LayerStack;
 		static Application* s_Instance;
 		ImGuiLayer* m_ImGuiLayer;
+		std::chrono::steady_clock::time_point m_timestamp;
 	};
 	Application* CreateApplication();
 

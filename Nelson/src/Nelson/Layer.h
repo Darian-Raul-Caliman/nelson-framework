@@ -2,6 +2,7 @@
 
 #include "Core.h"
 #include "Events/Event.h"
+#include "Nelson/Timestep.h"
 
 namespace Nelson {
 	class NS_API Layer {
@@ -12,9 +13,9 @@ namespace Nelson {
 
 		virtual void OnAttach(){}
 		virtual void OnDetach(){}
-		virtual void OnUpdate(){}
 		virtual void OnUIRender(){}
 		virtual void OnEvent(Event& event){}
+		virtual void OnUpdate(Timestep ts) {}
 
 		inline const std::string& GetName() const { return m_DebugName; }
 	protected:

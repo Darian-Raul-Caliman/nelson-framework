@@ -3,7 +3,7 @@
 #include "Layer.h"
 #include "Input.h"
 #include "Nelson/Log.h"
-
+#include "Timestep.h"
 #include <glad/GLAD.h>
 
 namespace Nelson {
@@ -14,10 +14,11 @@ namespace Nelson {
 
 	Application::Application() {
 		NS_CORE_ASSERT(!s_Instance, "Application already exists ! ");
+		m_timestamp = std::chrono::steady_clock::now();
 		s_Instance = this;
 		m_Window = std::unique_ptr<Window>(Window::Create());
 		m_Window->SetEventCallback(BIND_EVENT_FN(Application::onEvent));
-		ImGuiLayer* m_ImGuiLayer = new ImGuiLayer();
+		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 	}
 	Application::~Application() {
@@ -69,12 +70,18 @@ namespace Nelson {
 	void Application::Run() {
 		
 
+
+
 		while (m_Running) {
+
+			auto now = std::chrono::steady_clock::now();
+			Timestep ts = std::chrono::duration<float>(now - m_timestamp).count();
+			m_timestamp = now;
+
 			glClearColor(1, 0, 1, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
 			for (Layer* layer : m_LayerStack) {
-				layer->OnUpdate();
-
+				layer->OnUpdate(ts);
 			}		
 
 			m_ImGuiLayer->Begin();
