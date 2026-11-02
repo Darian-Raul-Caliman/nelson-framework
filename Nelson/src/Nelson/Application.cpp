@@ -21,9 +21,17 @@ namespace Nelson {
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 	}
+
 	Application::~Application() {
 
 	}
+
+	void Application::SetUpdateMode(UpdateMode mode) {
+		m_UpdateMode = mode;
+		m_Window->SetWaitForEvents(mode == UpdateMode::OnDemand);
+	}
+
+
 
 	void Application::PushLayer(Layer* layer) 
 	{
@@ -59,6 +67,10 @@ namespace Nelson {
 	}
 
 
+	UpdateMode Application::GetUpdateMode() const
+	{
+		return UpdateMode();
+	}
 
 	bool Application::OnWindowClose(WindowCloseEvent& e) {
 
@@ -77,6 +89,9 @@ namespace Nelson {
 			auto now = std::chrono::steady_clock::now();
 			Timestep ts = std::chrono::duration<float>(now - m_timestamp).count();
 			m_timestamp = now;
+			// daca trece timestampul de 100 ms se seteaza ca fiind acela 
+			if (ts > 0.1f)
+				ts = 0.1f;
 
 			glClearColor(1, 0, 1, 1);
 			glClear(GL_COLOR_BUFFER_BIT);

@@ -15,8 +15,11 @@ namespace Nelson {
 		inline unsigned int GetHeight() const override { return m_Data.Height; }
 		inline virtual void* GetNativeWindow() const override { return m_Window; }
 		inline void SetEventCallback(const EventCallbackFn& callback) override { m_Data.EventCallback = callback; }
+		void SetWaitForEvents(bool enabled);
+		bool IsWaitingForEvents() const;
 		void SetVSync(bool enabled) override;
 		bool IsVSync() const override;
+		
 
 	private:
 		virtual void Init(const WindowProps& props);
@@ -28,6 +31,8 @@ namespace Nelson {
 			std::string Title;
 			unsigned int Width, Height;
 			bool VSync;
+			bool WaitForEvents = false;
+			int ExtraFrames = 0;
 			EventCallbackFn EventCallback;
 		};
 		WindowData m_Data;

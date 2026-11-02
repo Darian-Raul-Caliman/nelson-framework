@@ -11,6 +11,13 @@
 
 namespace Nelson {
 
+	enum class UpdateMode
+	{
+		OnDemand,    
+		Continuous   
+	};
+
+
 	class NS_API Application
 	{
 	public:
@@ -23,7 +30,8 @@ namespace Nelson {
 
 		inline static Application& Get() { return *s_Instance; }
 		inline Window& GetWindow() { return *m_Window; }
-
+		void SetUpdateMode(UpdateMode mode);
+		UpdateMode GetUpdateMode() const;
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
 		std::unique_ptr<Window> m_Window;
@@ -32,6 +40,7 @@ namespace Nelson {
 		static Application* s_Instance;
 		ImGuiLayer* m_ImGuiLayer;
 		std::chrono::steady_clock::time_point m_timestamp;
+		UpdateMode m_UpdateMode = UpdateMode::OnDemand;
 	};
 	Application* CreateApplication();
 

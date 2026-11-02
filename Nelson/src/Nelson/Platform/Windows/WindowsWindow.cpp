@@ -141,8 +141,25 @@ namespace Nelson {
 	}
 
 	void WindowsWindow::OnUpdate() {
-		glfwPollEvents();
 		glfwSwapBuffers(m_Window);
+
+		if (!m_Data.WaitForEvents)
+		{
+			glfwPollEvents();
+		}
+		else if (m_Data.ExtraFrames > 0)
+		{
+			glfwPollEvents();
+			m_Data.ExtraFrames -= 1;
+
+		}
+
+		else
+		{
+			glfwWaitEvents();
+			m_Data.ExtraFrames = 3;
+		}
+
 	}
 
 	void WindowsWindow::SetVSync(bool enabled) {
@@ -156,9 +173,22 @@ namespace Nelson {
 		m_Data.VSync = enabled;
 	}
 
+
+
 	bool WindowsWindow::IsVSync() const
 	{
 		return m_Data.VSync;
+	}
+
+
+	void WindowsWindow::SetWaitForEvents(bool enabled) {
+		m_Data.WaitForEvents = enabled;
+	}
+
+
+	bool WindowsWindow::IsWaitingForEvents() const
+	{
+		return m_Data.WaitForEvents;
 	}
 
 }
