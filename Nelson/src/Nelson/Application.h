@@ -17,11 +17,23 @@ namespace Nelson {
 		Continuous   
 	};
 
+	//user configuration needed, this is default
+
+	struct ApplicationSpecification
+	{
+		std::string Name = "Nelson App";
+		uint32_t Width = 1280;
+		uint32_t Height = 720;
+		bool VSync = true;
+		UpdateMode Mode = UpdateMode::OnDemand;
+		bool EnableDockspace = true;
+	};
+
 
 	class NS_API Application
 	{
 	public:
-		Application();
+		Application(const ApplicationSpecification& spec = ApplicationSpecification());
 		virtual ~Application();
 		void onEvent(Event& e);
 		void Run();
@@ -32,6 +44,7 @@ namespace Nelson {
 		inline Window& GetWindow() { return *m_Window; }
 		void SetUpdateMode(UpdateMode mode);
 		UpdateMode GetUpdateMode() const;
+		const ApplicationSpecification& GetSpecification() const;
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
 		std::unique_ptr<Window> m_Window;
@@ -41,6 +54,9 @@ namespace Nelson {
 		ImGuiLayer* m_ImGuiLayer;
 		std::chrono::steady_clock::time_point m_timestamp;
 		UpdateMode m_UpdateMode = UpdateMode::OnDemand;
+		ApplicationSpecification m_Specification;
+
+
 	};
 	Application* CreateApplication();
 

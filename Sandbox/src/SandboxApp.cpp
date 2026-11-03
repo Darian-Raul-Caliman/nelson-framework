@@ -49,8 +49,9 @@ class Sandbox : public Nelson::Application {
 
 
 public:
-	Sandbox() {
-		SetUpdateMode(Nelson::UpdateMode::OnDemand); // Continuous or OnDemand
+	Sandbox(const Nelson::ApplicationSpecification& spec) : Application(spec) {
+		SetUpdateMode(Nelson::UpdateMode::Continuous); // Continuous or OnDemand
+
 		PushLayer(new ExampleLayer());
 	}
 	~Sandbox() {
@@ -58,5 +59,9 @@ public:
 };
 
 Nelson::Application* Nelson::CreateApplication() {
-	return new Sandbox();
+
+	Nelson::ApplicationSpecification spec;
+	spec.Name = "Any Engine";
+
+	return new Sandbox(spec);
 }

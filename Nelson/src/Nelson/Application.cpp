@@ -12,12 +12,16 @@ namespace Nelson {
 
 	Application* Application::s_Instance = nullptr;
 
-	Application::Application() {
+	Application::Application(const ApplicationSpecification& spec ) {
 		NS_CORE_ASSERT(!s_Instance, "Application already exists ! ");
+		m_Specification = spec;
 		m_timestamp = std::chrono::steady_clock::now();
 		s_Instance = this;
-		m_Window = std::unique_ptr<Window>(Window::Create());
+
+		WindowProps props(m_Specification.Name, m_Specification.Width, m_Specification.Height);
+		m_Window = std::unique_ptr<Window>(Window::Create(props));
 		m_Window->SetEventCallback(BIND_EVENT_FN(Application::onEvent));
+		m_Window->SetVSync(m_Specification.VSync);
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 	}
@@ -25,12 +29,11 @@ namespace Nelson {
 	Application::~Application() {
 
 	}
-
+	
 	void Application::SetUpdateMode(UpdateMode mode) {
-		m_UpdateMode = mode;
+		m_Specification.Mode = mode;
 		m_Window->SetWaitForEvents(mode == UpdateMode::OnDemand);
 	}
-
 
 
 	void Application::PushLayer(Layer* layer) 
