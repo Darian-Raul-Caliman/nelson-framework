@@ -62,6 +62,16 @@ Nelson::Application* Nelson::CreateApplication() {
 
 	Nelson::ApplicationSpecification spec;
 	spec.Name = "Any Engine";
+	Sandbox* app = new Sandbox(spec);
 
-	return new Sandbox(spec);
+	app->SetMenubarCallback([app]()
+		{
+			if (ImGui::BeginMenu("File"))
+			{
+				if (ImGui::MenuItem("Exit"))
+					app->Close();
+				ImGui::EndMenu();
+			}
+		});
+	return app;
 }

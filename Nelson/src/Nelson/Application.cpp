@@ -4,6 +4,7 @@
 #include "Input.h"
 #include "Nelson/Log.h"
 #include "Timestep.h"
+#include "imgui.h"
 #include <glad/GLAD.h>
 
 namespace Nelson {
@@ -48,6 +49,9 @@ namespace Nelson {
 		layer->OnAttach();
 	}
 
+	void Application::Close() {
+		m_Running = false;
+	}
 
 
 	void Application::onEvent(Event& e) {
@@ -73,6 +77,11 @@ namespace Nelson {
 	UpdateMode Application::GetUpdateMode() const
 	{
 		return UpdateMode();
+	}
+
+	const ApplicationSpecification& Application::GetSpecification() const
+	{
+		return m_Specification;
 	}
 
 	bool Application::OnWindowClose(WindowCloseEvent& e) {
@@ -103,6 +112,19 @@ namespace Nelson {
 			}		
 
 			m_ImGuiLayer->Begin();
+
+			if (m_MenubarCallback)
+			{
+				if (ImGui::BeginMainMenuBar())
+				{
+					m_MenubarCallback();
+					ImGui::EndMainMenuBar();
+				}
+			}
+
+			if (m_Specification.EnableDockspace)
+				ImGui::DockSpaceOverViewport(nullptr, ImGuiDockNodeFlags_PassthruCentralNode);
+
 
 			for (Layer* layer : m_LayerStack)
 				layer->OnUIRender();

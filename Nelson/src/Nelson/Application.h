@@ -45,6 +45,8 @@ namespace Nelson {
 		void SetUpdateMode(UpdateMode mode);
 		UpdateMode GetUpdateMode() const;
 		const ApplicationSpecification& GetSpecification() const;
+		void Close();
+		void SetMenubarCallback(const std::function<void()>& callback) { m_MenubarCallback = callback; };
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
 		std::unique_ptr<Window> m_Window;
@@ -55,6 +57,7 @@ namespace Nelson {
 		std::chrono::steady_clock::time_point m_timestamp;
 		UpdateMode m_UpdateMode = UpdateMode::OnDemand;
 		ApplicationSpecification m_Specification;
+		std::function<void()> m_MenubarCallback;
 
 
 	};

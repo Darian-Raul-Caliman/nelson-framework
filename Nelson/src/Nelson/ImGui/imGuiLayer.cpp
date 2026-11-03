@@ -23,10 +23,10 @@ namespace Nelson {
 
 	void ImGuiLayer::Begin()
 	{
+
 		ImGui_ImplOpenGL3_NewFrame();
 		ImGui_ImplGlfw_NewFrame();
 		ImGui::NewFrame();
-		ImGui::DockSpaceOverViewport(0,ImGuiDockNodeFlags_PassthruCentralNode);
 	}
 
 	void ImGuiLayer::End()
