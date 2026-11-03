@@ -6,7 +6,7 @@
 #include <GLFW/glfw3.h>
 #include "Nelson/Platform/OpenGL/ImGuiOpenGLRenderer.h"
 #include "Nelson/Application.h"
-
+#include "Theme.h"
 
 namespace Nelson {
 
@@ -47,7 +47,7 @@ namespace Nelson {
 	{
 
 		ImGui::CreateContext();
-		ImGui::StyleColorsDark();
+		ApplyNelsonTheme();
 
 		ImGuiIO& io = ImGui::GetIO(); (void)io;
 		Application& app = Application::Get();
