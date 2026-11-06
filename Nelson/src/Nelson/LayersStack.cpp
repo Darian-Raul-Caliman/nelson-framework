@@ -6,13 +6,6 @@ namespace Nelson {
 	LayerStack::LayerStack()
 	{
 	}
-	LayerStack::~LayerStack()
-	{
-		for (Layer* layer : m_Layers)
-		{
-			delete layer;
-		}
-	}
 
 	void LayerStack::PushLayer(Layer* layer)
 	{
@@ -40,6 +33,23 @@ namespace Nelson {
 		auto it = std::find(m_Layers.begin(), m_Layers.end(), overlay);
 		if (it != m_Layers.end())
 			m_Layers.erase(it);
+	}
+
+	void LayerStack::Clear()
+	{
+		for (Layer* layer : m_Layers)
+		{
+			layer->OnDetach();
+			delete layer;
+		}
+
+		m_Layers.clear();
+		m_LayerInsertIndex = 0;
+	}
+
+	LayerStack::~LayerStack()
+	{
+		Clear();
 	}
 
 }

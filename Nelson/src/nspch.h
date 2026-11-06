@@ -11,6 +11,7 @@
 #include <sstream>
 #include <nlohmann/json.hpp>
 #include <cstdlib>
+#include <filesystem>
 
 
 #ifdef NS_PLATFORM_WINDOWS

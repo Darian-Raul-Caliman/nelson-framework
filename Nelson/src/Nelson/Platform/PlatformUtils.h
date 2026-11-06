@@ -4,6 +4,6 @@
 
 namespace Nelson {
 
-	std::filesystem::path GetUserPath(const std::string& appname);
+	std::filesystem::path GetUserDataPath(const std::string& appname);
 }
 

@@ -7,6 +7,7 @@
 #include "Nelson/Events/ApplicationEvent.h"
 #include "LayerStack.h"
 #include "Nelson/ImGui/imGuiLayer.h"
+#include "Settings.h"
 
 
 namespace Nelson {
@@ -47,6 +48,7 @@ namespace Nelson {
 		const ApplicationSpecification& GetSpecification() const;
 		void Close();
 		void SetMenubarCallback(const std::function<void()>& callback) { m_MenubarCallback = callback; };
+		Settings& GetSettings();
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
 		std::unique_ptr<Window> m_Window;
@@ -58,7 +60,7 @@ namespace Nelson {
 		UpdateMode m_UpdateMode = UpdateMode::OnDemand;
 		ApplicationSpecification m_Specification;
 		std::function<void()> m_MenubarCallback;
-
+		Settings m_Settings;
 
 	};
 	Application* CreateApplication();

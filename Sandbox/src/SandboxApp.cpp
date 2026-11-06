@@ -8,8 +8,8 @@ public:
 	float m_Position = 0.0f;
 	float m_LastFrameMs = 0.0f;
 	int m_FrameCount = 0;
-
-
+	bool m_ShowDemo = true;
+	float m_Volume = 0.5f;
 
 
 	void OnUpdate(Nelson::Timestep ts) override{
@@ -25,13 +25,13 @@ public:
 	void OnUIRender() override {
 		ImGui::Begin("Nume fereastra");
 		ImGui::Text("Nelson Engine");
-//		ImGui::Text("Pozitie: %.1f", m_Position);
-//		ImGui::Text("Frame: %.2f ms", m_LastFrameMs);
-//		ImGui::Text("FPS: %.1f", ImGui::GetIO().Framerate);
-//		ImGui::GetIO().Framerate;
+		ImGui::Checkbox("Arata demo", &m_ShowDemo);
+		ImGui::SliderFloat("Volum", &m_Volume, 0.0f, 1.0f);
 		ImGui::Text("Frame-uri: %d", m_FrameCount);
 		ImGui::End();
-		ImGui::ShowDemoWindow();
+
+		if (m_ShowDemo)
+			ImGui::ShowDemoWindow();
 	}
 
 
@@ -41,8 +41,17 @@ public:
 	}
 
 	void OnAttach() override {
+		auto& settings = Nelson::Application::Get().GetSettings();
+		m_ShowDemo = settings.Get("showDemo", true);
+		m_Volume = settings.Get("volume", 0.5f);
 
 
+	}
+
+	void OnDetach() override {
+		auto& settings = Nelson::Application::Get().GetSettings();
+		settings.Set("showDemo", m_ShowDemo);
+		settings.Set("volume", m_Volume);
 	}
 
 

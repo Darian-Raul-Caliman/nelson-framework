@@ -12,6 +12,7 @@
 #include "Nelson/ImGui/imGuiLayer.h"
 #include "Nelson/Input.h"
 #include "Nelson/Serialization/JsonFile.h"
+#include "Nelson/Settings.h"
 
 
 // -- Entry point -----------------------------

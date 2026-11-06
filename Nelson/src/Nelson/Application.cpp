@@ -6,6 +6,7 @@
 #include "Timestep.h"
 #include "imgui.h"
 #include <glad/GLAD.h>
+#include "Nelson/Platform/PlatformUtils.h"
 
 namespace Nelson {
 
@@ -18,11 +19,12 @@ namespace Nelson {
 		m_Specification = spec;
 		m_timestamp = std::chrono::steady_clock::now();
 		s_Instance = this;
-
+		m_Settings.Load(GetUserDataPath(m_Specification.Name) / "settings.json");
 		WindowProps props(m_Specification.Name, m_Specification.Width, m_Specification.Height);
 		m_Window = std::unique_ptr<Window>(Window::Create(props));
 		m_Window->SetEventCallback(BIND_EVENT_FN(Application::onEvent));
 		m_Window->SetVSync(m_Specification.VSync);
+
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 	}
@@ -51,6 +53,11 @@ namespace Nelson {
 
 	void Application::Close() {
 		m_Running = false;
+	}
+
+	Settings& Application::GetSettings()
+	{
+		return m_Settings;
 	}
 
 
@@ -138,6 +145,10 @@ namespace Nelson {
 
 			m_Window->OnUpdate();
 		}
+
+		m_LayerStack.Clear();
+		m_ImGuiLayer = nullptr;
+		m_Settings.Save();
 	}
 
 }
