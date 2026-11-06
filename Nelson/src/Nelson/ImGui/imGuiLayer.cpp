@@ -47,8 +47,9 @@ namespace Nelson {
 	{
 
 		ImGui::CreateContext();
-		ApplyNelsonTheme();
 
+		ApplyNelsonTheme();
+		
 		ImGuiIO& io = ImGui::GetIO(); (void)io;
 		Application& app = Application::Get();
 		GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetNativeWindow());

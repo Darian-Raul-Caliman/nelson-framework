@@ -15,6 +15,7 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "Nelson/vendor/GLFW/include"
 IncludeDir["Glad"] = "Nelson/vendor/Glad/include"
 IncludeDir["imGui"] = "Nelson/vendor/imGui"
+IncludeDir["json"] = "Nelson/vendor/nlohmann_json/include"
 	startproject "Sandbox"
 
 include "premake/GLFW.lua"
@@ -43,7 +44,8 @@ project "Nelson"
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
-		"%{IncludeDir.imGui}"
+		"%{IncludeDir.imGui}",
+		"%{IncludeDir.json}"
 	}
 
 	links {
@@ -95,7 +97,8 @@ project "Sandbox"
 	includedirs {
 		"%{IncludeDir.imGui}",
 		"Nelson/vendor/spdlog/include",
-		"Nelson/src"
+		"Nelson/src",
+		"%{IncludeDir.json}"
 	}
 
 	links {

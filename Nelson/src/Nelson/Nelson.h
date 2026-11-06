@@ -11,6 +11,8 @@
 #include "Nelson/MouseCodes.h"
 #include "Nelson/ImGui/imGuiLayer.h"
 #include "Nelson/Input.h"
+#include "Nelson/Serialization/JsonFile.h"
+
 
 // -- Entry point -----------------------------
 #include "Nelson/EntryPoint.h"
