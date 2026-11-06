@@ -10,7 +10,7 @@
 #include <unordered_set>
 #include <sstream>
 #include <nlohmann/json.hpp>
-
+#include <cstdlib>
 
 
 #ifdef NS_PLATFORM_WINDOWS
