@@ -13,6 +13,7 @@
 #include "Nelson/Input.h"
 #include "Nelson/Serialization/JsonFile.h"
 #include "Nelson/Settings.h"
+#include "Nelson/Clipboard.h"
 
 
 // -- Entry point -----------------------------
