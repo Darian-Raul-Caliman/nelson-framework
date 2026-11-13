@@ -12,6 +12,7 @@ workspace "Nelson"
 outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir = {}
+IncludeDir["nfd"] = "Nelson/vendor/nfd/src/include"
 IncludeDir["GLFW"] = "Nelson/vendor/GLFW/include"
 IncludeDir["Glad"] = "Nelson/vendor/Glad/include"
 IncludeDir["imGui"] = "Nelson/vendor/imGui"
@@ -21,6 +22,7 @@ IncludeDir["json"] = "Nelson/vendor/nlohmann_json/include"
 include "premake/GLFW.lua"
 include "Nelson/vendor/Glad"
 include "Nelson/vendor/imGui"
+include "Nelson/vendor/nfd/NFD.lua"
 
 
 
@@ -45,6 +47,7 @@ project "Nelson"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.imGui}",
+		"%{IncludeDir.nfd}",
 		"%{IncludeDir.json}"
 	}
 
@@ -52,6 +55,7 @@ project "Nelson"
 		"GLFW",
 		"Glad",
 		"imGui",
+		"nfd",
 		"opengl32.lib"
 	}
 

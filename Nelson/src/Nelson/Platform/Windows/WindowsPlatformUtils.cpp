@@ -32,7 +32,7 @@ namespace Nelson {
 		bool isWeb = url.rfind("http://", 0) == 0 || url.rfind("https://", 0) == 0;
 		if (!isWeb)
 		{
-			NS_CORE_WARN("OpenURL: refuz adresa '{0}' (doar http:// si https://)", url);
+			NS_CORE_WARN("OpenURL: adresa invalida '{0}' (doar http:// si https://)", url);
 			return false;
 		}
 

@@ -5,3 +5,6 @@
 	path = Nelson/vendor/GLFW
 	url = https://github.com/TheCherno/glfw
 
+[submodule "Nelson/vendor/nfd"]
+	path = Nelson/vendor/nfd
+	url = https://github.com/btzy/nativefiledialog-extended
