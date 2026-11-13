@@ -14,6 +14,7 @@ public:
 
 	void OnUpdate(Nelson::Timestep ts) override{
 		m_FrameCount += 1;
+		Nelson::OpenURL("https://google.com");
 
 	}
 
@@ -63,8 +64,11 @@ public:
 Nelson::Application* Nelson::CreateApplication() {
 
 	Nelson::ApplicationSpecification spec;
+	
+
 	spec.Name = "Any Engine";
 	Sandbox* app = new Sandbox(spec);
+
 
 	app->SetMenubarCallback([app]()
 		{

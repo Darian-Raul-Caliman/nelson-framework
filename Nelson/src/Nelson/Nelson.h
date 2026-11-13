@@ -14,6 +14,7 @@
 #include "Nelson/Serialization/JsonFile.h"
 #include "Nelson/Settings.h"
 #include "Nelson/Clipboard.h"
+#include "Nelson/Platform/PlatformUtils.h"
 
 
 // -- Entry point -----------------------------
