@@ -24,6 +24,8 @@ namespace Nelson {
 			const std::vector<FileFilter>& filters = {},
 			const std::string& defaultName = "");
 
+		static void Init();
+		static void Shutdown();
 		static std::optional<std::filesystem::path> PickFolder();
 	};
 	

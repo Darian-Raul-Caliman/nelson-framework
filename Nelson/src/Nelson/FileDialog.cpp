@@ -63,6 +63,21 @@ namespace Nelson {
 		return ToResult(result, outPath);
 	}
 
+	void FileDialog::Init()
+	{
+		nfdresult_t result = NFD_Init();
+		if (result == NFD_ERROR) {
+			NS_CORE_ERROR("Filedialog: {0}", NFD_GetError());
+		}
+
+	}
+
+	void FileDialog::Shutdown()
+	{
+		NFD_Quit();
+	}
+
+
 	std::optional<std::filesystem::path> FileDialog::PickFolder()
 	{
 		nfdu8char_t* outPath = nullptr;

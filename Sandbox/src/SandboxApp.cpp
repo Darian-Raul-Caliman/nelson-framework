@@ -4,71 +4,49 @@
 class ExampleLayer : public Nelson::Layer
 {
 public:
-	ExampleLayer() : Layer("Example") {};
-	float m_Position = 0.0f;
-	float m_LastFrameMs = 0.0f;
-	int m_FrameCount = 0;
-	bool m_ShowDemo = true;
-	float m_Volume = 0.5f;
+	ExampleLayer() : Layer("Example") {}
 
-
-	void OnUpdate(Nelson::Timestep ts) override{
-		m_FrameCount += 1;
-		Nelson::OpenURL("https://google.com");
-
+	void OnAttach() override
+	{
 	}
 
-	void OnUIRender() override {
-		ImGui::Begin("Nume fereastra");
+	void OnDetach() override
+	{
+	}
+
+	void OnUpdate(Nelson::Timestep ts) override
+	{
+	}
+
+	void OnUIRender() override
+	{
+		ImGui::Begin("Sandbox");
+		ImGui::Text("Nelson Engine");
 		ImGui::End();
-
-		if (m_ShowDemo)
-			ImGui::ShowDemoWindow();
 	}
-
 
 	void OnEvent(Nelson::Event& event) override
 	{
-
 	}
-
-	void OnAttach() override {
-		auto& settings = Nelson::Application::Get().GetSettings();
-		m_ShowDemo = settings.Get("showDemo", true);
-		m_Volume = settings.Get("volume", 0.5f);
-	}
-
-	void OnDetach() override {
-		auto& settings = Nelson::Application::Get().GetSettings();
-		settings.Set("showDemo", m_ShowDemo);
-		settings.Set("volume", m_Volume);
-	}
-
-
 };
 
-
-class Sandbox : public Nelson::Application {
-
-
+class Sandbox : public Nelson::Application
+{
 public:
-	Sandbox(const Nelson::ApplicationSpecification& spec) : Application(spec) {
-		SetUpdateMode(Nelson::UpdateMode::Continuous); // Continuous or OnDemand
-
+	Sandbox(const Nelson::ApplicationSpecification& spec)
+		: Application(spec)
+	{
 		PushLayer(new ExampleLayer());
 	}
-	~Sandbox() {
-	}
 };
 
-Nelson::Application* Nelson::CreateApplication() {
-
+Nelson::Application* Nelson::CreateApplication()
+{
 	Nelson::ApplicationSpecification spec;
-	
-
 	spec.Name = "Any Engine";
-	Sandbox* app = new Sandbox(spec);
+	spec.Mode = Nelson::UpdateMode::OnDemand;
 
+	Sandbox* app = new Sandbox(spec);
 
 	app->SetMenubarCallback([app]()
 		{
@@ -79,5 +57,6 @@ Nelson::Application* Nelson::CreateApplication() {
 				ImGui::EndMenu();
 			}
 		});
+
 	return app;
 }

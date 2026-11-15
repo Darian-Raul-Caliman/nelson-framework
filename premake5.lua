@@ -22,7 +22,7 @@ IncludeDir["json"] = "Nelson/vendor/nlohmann_json/include"
 include "premake/GLFW.lua"
 include "Nelson/vendor/Glad"
 include "Nelson/vendor/imGui"
-include "Nelson/premake/NFD.lua"
+include "premake/NFD.lua"
 
 
 

@@ -1,5 +1,6 @@
 #include "nspch.h"
 #include "Application.h"
+#include "Nelson/FileDialog.h"
 #include "Layer.h"
 #include "Input.h"
 #include "Nelson/Log.h"
@@ -24,7 +25,7 @@ namespace Nelson {
 		m_Window = std::unique_ptr<Window>(Window::Create(props));
 		m_Window->SetEventCallback(BIND_EVENT_FN(Application::onEvent));
 		m_Window->SetVSync(m_Specification.VSync);
-
+		FileDialog::Init();;
 		m_ImGuiLayer = new ImGuiLayer();
 		PushOverlay(m_ImGuiLayer);
 	}
@@ -147,8 +148,10 @@ namespace Nelson {
 		}
 
 		m_LayerStack.Clear();
+		FileDialog::Shutdown();
 		m_ImGuiLayer = nullptr;
 		m_Settings.Save();
+
 	}
 
 }
