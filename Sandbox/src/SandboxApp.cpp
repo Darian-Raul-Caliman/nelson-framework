@@ -8,6 +8,22 @@ public:
 
 	void OnAttach() override
 	{
+		ImGui::CreateContext();
+		ImFontConfig fontConfig;
+		fontConfig.OversampleH = 1;
+		fontConfig.OversampleV = 1;
+		fontConfig.PixelSnapH = true;
+		static const ImWchar ranges[] =
+		{
+			0x0020, 0x00FF,
+			0x0100, 0x017F,
+			0x0218, 0x021B,
+			0,
+		};
+
+		ImGuiIO& io = ImGui::GetIO();
+		io.FontDefault = io.Fonts->AddFontFromMemoryCompressedTTF(
+			PixelifySans_compressed_data, PixelifySans_compressed_size, 16.0f, &fontConfig, ranges);
 	}
 
 	void OnDetach() override
@@ -22,6 +38,7 @@ public:
 	{
 		ImGui::Begin("Sandbox");
 		ImGui::Text("Nelson Engine");
+		ImGui::Text(" Mesaj ");
 		ImGui::End();
 	}
 
