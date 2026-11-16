@@ -32,6 +32,6 @@ Application* Nelson::CreateApplication()
 	spec.Name = "MyApp";
 
 	auto* app = new Application(spec);
-	app->PushLayer(new ExampleLayer());
+	app->PushLayer<ExampleLayer>();
 	return app;
 }

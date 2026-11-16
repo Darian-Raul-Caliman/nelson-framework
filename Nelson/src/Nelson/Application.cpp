@@ -121,13 +121,17 @@ namespace Nelson {
 
 			m_ImGuiLayer->Begin();
 
-			if (m_MenubarCallback)
+			if (ImGui::BeginMainMenuBar())
 			{
-				if (ImGui::BeginMainMenuBar())
-				{
+				if (m_MenubarCallback)
 					m_MenubarCallback();
-					ImGui::EndMainMenuBar();
+				else if (ImGui::BeginMenu("File"))
+				{
+					if (ImGui::MenuItem("Exit"))
+						Close();
+					ImGui::EndMenu();
 				}
+				ImGui::EndMainMenuBar();
 			}
 
 			if (m_Specification.EnableDockspace)

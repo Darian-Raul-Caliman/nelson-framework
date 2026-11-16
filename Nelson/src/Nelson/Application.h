@@ -30,13 +30,7 @@ namespace Nelson {
 		bool EnableDockspace = true;
 	};
 
-	template<typename T>
-	T* PushLayer()
-	{
-		T* layer = new T();
-		PushLayer(layer);
-		return layer;
-	}
+
 
 	class NS_API Application
 	{
@@ -47,6 +41,14 @@ namespace Nelson {
 		void Run();
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* layer);
+
+		template<typename T>
+		T* PushLayer()
+		{
+			T* layer = new T();
+			PushLayer(layer);
+			return layer;
+		}
 
 		inline static Application& Get() { return *s_Instance; }
 		inline Window& GetWindow() { return *m_Window; }
