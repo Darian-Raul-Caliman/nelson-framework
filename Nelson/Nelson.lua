@@ -18,7 +18,7 @@ group "Dependencies"
 	include "../premake/NFD.lua"
 	include "vendor/Glad"
 	include "vendor/imGui"
-group ""
+
 
 project "Nelson"
 	kind "StaticLib"
@@ -80,7 +80,7 @@ project "Nelson"
 		defines "NS_DIST"
 
 	filter {}
-
+group ""
 function NelsonApp()
 	language "C++"
 	cppdialect "C++17"

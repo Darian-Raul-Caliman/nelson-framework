@@ -30,6 +30,13 @@ namespace Nelson {
 		bool EnableDockspace = true;
 	};
 
+	template<typename T>
+	T* PushLayer()
+	{
+		T* layer = new T();
+		PushLayer(layer);
+		return layer;
+	}
 
 	class NS_API Application
 	{
