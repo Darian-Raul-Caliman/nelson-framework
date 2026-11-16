@@ -68,7 +68,7 @@ namespace Nelson {
 		//NS_CORE_INFO("{0}", e); Logging events in the console
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(Application::OnWindowClose));
 
-		NS_CORE_TRACE("{0}", e);
+		//NS_CORE_TRACE("{0}", e);
 
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin();)
 		{
@@ -113,7 +113,7 @@ namespace Nelson {
 			if (ts > 0.1f)
 				ts = 0.1f;
 
-			glClearColor(1, 0, 1, 1);
+			//glClearColor(1, 0, 1, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
 			for (Layer* layer : m_LayerStack) {
 				layer->OnUpdate(ts);
