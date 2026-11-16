@@ -2,9 +2,23 @@
 
 
 
+# Nelson is an application framework designed to run and develop desktop applications
+#Current version : 1.0.0
+
+# Requirements
+-Windows 10 or 11
+-Git
+-VS 2026 with "Desktop development with C++" installed
 
 
+# Create an new project 
 
-is an application framework designed to run and develop applications in an 2d format
+- Open cmd
+- cd C:\Dev - or the projects folder
+- git clone --recursive https://github.com/Darian-Raul-Caliman/nelson-app-template ProjectName
+- cd ProjectName
+- git remote remove origin
+- GenerateProjects.bat
+- Open .sln and run 
 
---more to come--
+
