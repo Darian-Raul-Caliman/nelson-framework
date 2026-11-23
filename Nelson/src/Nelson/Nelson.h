@@ -16,6 +16,7 @@
 #include "Nelson/Clipboard.h"
 #include "Nelson/FileDialog.h"
 #include "Nelson/Platform/PlatformUtils.h"
+#include "Nelson/CommandHistory.h"
 #include "imgui.h"
 
 
