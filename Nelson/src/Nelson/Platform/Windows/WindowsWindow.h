@@ -19,7 +19,7 @@ namespace Nelson {
 		bool IsWaitingForEvents() const;
 		void SetVSync(bool enabled) override;
 		bool IsVSync() const override;
-		
+		void SetMaxWaitTime(double seconds) override { m_Data.MaxWaitTime = seconds; }
 
 	private:
 		virtual void Init(const WindowProps& props);
@@ -33,6 +33,7 @@ namespace Nelson {
 			bool VSync;
 			bool WaitForEvents = false;
 			int ExtraFrames = 0;
+			double MaxWaitTime = -1.0;
 			EventCallbackFn EventCallback;
 		};
 		WindowData m_Data;

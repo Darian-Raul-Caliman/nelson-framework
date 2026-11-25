@@ -17,6 +17,8 @@
 #include "Nelson/FileDialog.h"
 #include "Nelson/Platform/PlatformUtils.h"
 #include "Nelson/CommandHistory.h"
+#include "Nelson/ActionRegistry.h"
+#include "Nelson/Timer.h"
 #include "imgui.h"
 
 

@@ -33,6 +33,25 @@ namespace Nelson {
 		std::vector<std::unique_ptr<Command>> m_Commands;
 	};
 
+	template<typename T>
+	class SetValueCommand : public Command
+	{
+	public:
+		SetValueCommand(T& target, T newValue, std::string name = "Modificare")
+			: m_Target(target), m_Old(target), m_New(std::move(newValue)), m_Name(std::move(name)) {
+		}
+
+		void Execute() override { m_Target = m_New; }
+		void Undo()    override { m_Target = m_Old; }
+		std::string GetName() const override { return m_Name; }
+
+	private:
+		T& m_Target;
+		T  m_Old;
+		T  m_New;
+		std::string m_Name;
+	};
+
 	class CommandHistory
 	{
 	public:

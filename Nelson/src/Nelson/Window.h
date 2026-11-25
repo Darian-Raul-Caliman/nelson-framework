@@ -32,7 +32,7 @@ namespace Nelson {
 		virtual bool IsVSync() const = 0;
 		virtual void SetWaitForEvents(bool enabled) = 0;
 		virtual bool IsWaitingForEvents() const = 0;
-
+		virtual void SetMaxWaitTime(double seconds) = 0; 
 		static Window* Create(const WindowProps& props = WindowProps());
 	};
 

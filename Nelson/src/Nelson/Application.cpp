@@ -7,6 +7,7 @@
 #include "Timestep.h"
 #include "imgui.h"
 #include <glad/GLAD.h>
+#include "Nelson/Timer.h"
 #include "Nelson/Platform/PlatformUtils.h"
 
 namespace Nelson {
@@ -119,6 +120,7 @@ namespace Nelson {
 				layer->OnUpdate(ts);
 			}		
 
+			Timer::Update();
 			m_ImGuiLayer->Begin();
 
 			if (ImGui::BeginMainMenuBar())
@@ -148,10 +150,12 @@ namespace Nelson {
 
 				
 
+			m_Window->SetMaxWaitTime(Timer::GetTimeUntilNext());   // <- nou: chiar inainte de m_Window->OnUpdate()
 			m_Window->OnUpdate();
 		}
 
 		m_LayerStack.Clear();
+		Timer::CancelAll();
 		FileDialog::Shutdown();
 		m_ImGuiLayer = nullptr;
 		m_Settings.Save();

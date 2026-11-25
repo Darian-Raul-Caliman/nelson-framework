@@ -15,5 +15,6 @@
 
 
 #ifdef NS_PLATFORM_WINDOWS
-	#include <Windows.h>
+#define NOMINMAX
+#include <Windows.h>
 #endif

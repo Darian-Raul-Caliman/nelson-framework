@@ -156,7 +156,10 @@ namespace Nelson {
 
 		else
 		{
-			glfwWaitEvents();
+			if (m_Data.MaxWaitTime >= 0.0)
+				glfwWaitEventsTimeout(m_Data.MaxWaitTime);
+			else
+				glfwWaitEvents();
 			m_Data.ExtraFrames = 3;
 		}
 
