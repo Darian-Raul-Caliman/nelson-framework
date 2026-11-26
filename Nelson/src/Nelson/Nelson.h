@@ -19,6 +19,7 @@
 #include "Nelson/CommandHistory.h"
 #include "Nelson/ActionRegistry.h"
 #include "Nelson/Timer.h"
+#include "Nelson/MessageBus.h"
 #include "imgui.h"
 
 

@@ -9,6 +9,8 @@
 #include <glad/GLAD.h>
 #include "Nelson/Timer.h"
 #include "Nelson/ActionRegistry.h"
+#include "Nelson/MessageBus.h"
+
 #include "Nelson/Platform/PlatformUtils.h"
 
 namespace Nelson {
@@ -136,7 +138,7 @@ namespace Nelson {
 		while (m_Running) {
 
 			ProcessPendingLayerOps();
-
+			MessageBus::Flush();
 			auto now = std::chrono::steady_clock::now();
 			Timestep ts = std::chrono::duration<float>(now - m_timestamp).count();
 			m_timestamp = now;
@@ -180,7 +182,8 @@ namespace Nelson {
 
 				
 
-			m_Window->SetMaxWaitTime(Timer::GetTimeUntilNext());   
+			double wait = MessageBus::HasPending() ? 0.0 : Timer::GetTimeUntilNext();
+			m_Window->SetMaxWaitTime(wait);   
 			m_Window->OnUpdate();
 		}
 
@@ -188,6 +191,7 @@ namespace Nelson {
 		ProcessPendingLayerOps();       
 		m_LayerStack.Clear();
 		Timer::CancelAll();
+		MessageBus::Clear();
 		FileDialog::Shutdown();
 		m_ImGuiLayer = nullptr;
 		m_Settings.Save();
