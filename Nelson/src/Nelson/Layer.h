@@ -16,7 +16,7 @@ namespace Nelson {
 		virtual void OnUIRender(){}
 		virtual void OnEvent(Event& event){}
 		virtual void OnUpdate(Timestep ts) {}
-
+		virtual bool OnCloseRequested() { return true; }
 		inline const std::string& GetName() const { return m_DebugName; }
 	protected:
 		std::string m_DebugName;

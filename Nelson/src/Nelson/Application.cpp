@@ -8,6 +8,7 @@
 #include "imgui.h"
 #include <glad/GLAD.h>
 #include "Nelson/Timer.h"
+#include "Nelson/ActionRegistry.h"
 #include "Nelson/Platform/PlatformUtils.h"
 
 namespace Nelson {
@@ -41,16 +42,44 @@ namespace Nelson {
 	}
 
 
-	void Application::PushLayer(Layer* layer) 
+	void Application::PushLayer(Layer* layer)
 	{
-		m_LayerStack.PushLayer(layer);
-		layer->OnAttach();
+		auto op = [this, layer] { m_LayerStack.PushLayer(layer); layer->OnAttach(); };
+		if (m_InLoop) m_PendingLayerOps.push_back(op);   // in timpul buclei -> amanat
+		else op();                                       // inainte de Run (CreateApplication) -> imediat
 	}
 
-	void Application::PushOverlay(Layer* layer) 
+	void Application::PushOverlay(Layer* layer)
 	{
-		m_LayerStack.PushOverlay(layer);
-		layer->OnAttach();
+		auto op = [this, layer] { m_LayerStack.PushOverlay(layer); layer->OnAttach(); };
+		if (m_InLoop) m_PendingLayerOps.push_back(op);
+		else op();
+	}
+
+	void Application::PopLayer(Layer* layer)
+	{
+		auto op = [this, layer] { m_LayerStack.PopLayer(layer); layer->OnDetach(); delete layer; };
+		if (m_InLoop) m_PendingLayerOps.push_back(op);
+		else op();
+	}
+
+	void Application::ProcessPendingLayerOps()
+	{
+		while (!m_PendingLayerOps.empty())
+		{
+			auto ops = std::move(m_PendingLayerOps);
+			m_PendingLayerOps.clear();
+			for (auto& op : ops)
+				op();
+		}
+	}
+
+	void Application::RequestClose()
+	{
+		for (Layer* layer : m_LayerStack)
+			if (!layer->OnCloseRequested())
+				return;        
+		Close();
 	}
 
 	void Application::Close() {
@@ -85,7 +114,7 @@ namespace Nelson {
 
 	UpdateMode Application::GetUpdateMode() const
 	{
-		return UpdateMode();
+		return m_Specification.Mode;
 	}
 
 	const ApplicationSpecification& Application::GetSpecification() const
@@ -93,19 +122,20 @@ namespace Nelson {
 		return m_Specification;
 	}
 
-	bool Application::OnWindowClose(WindowCloseEvent& e) {
-
-		m_Running = false;
+	bool Application::OnWindowClose(WindowCloseEvent& e)
+	{
+		RequestClose();
 		return true;
-
 	}
 
 	void Application::Run() {
 		
 
 
-
+		m_InLoop = true;
 		while (m_Running) {
+
+			ProcessPendingLayerOps();
 
 			auto now = std::chrono::steady_clock::now();
 			Timestep ts = std::chrono::duration<float>(now - m_timestamp).count();
@@ -150,10 +180,12 @@ namespace Nelson {
 
 				
 
-			m_Window->SetMaxWaitTime(Timer::GetTimeUntilNext());   // <- nou: chiar inainte de m_Window->OnUpdate()
+			m_Window->SetMaxWaitTime(Timer::GetTimeUntilNext());   
 			m_Window->OnUpdate();
 		}
 
+		m_InLoop = false;
+		ProcessPendingLayerOps();       
 		m_LayerStack.Clear();
 		Timer::CancelAll();
 		FileDialog::Shutdown();

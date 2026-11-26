@@ -42,6 +42,19 @@ namespace Nelson {
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* layer);
 
+		void PopLayer(Layer* layer); 
+
+		template<typename T>
+		T* ReplaceLayer(Layer* old)   
+		{
+			T* layer = new T();
+			PopLayer(old);
+			PushLayer(layer);
+			return layer;
+		}
+
+		void RequestClose();
+
 		template<typename T>
 		T* PushLayer()
 		{
@@ -66,10 +79,13 @@ namespace Nelson {
 		static Application* s_Instance;
 		ImGuiLayer* m_ImGuiLayer;
 		std::chrono::steady_clock::time_point m_timestamp;
-		UpdateMode m_UpdateMode = UpdateMode::OnDemand;
 		ApplicationSpecification m_Specification;
 		std::function<void()> m_MenubarCallback;
 		Settings m_Settings;
+
+		void ProcessPendingLayerOps();
+		std::vector<std::function<void()>> m_PendingLayerOps;
+		bool m_InLoop = false;
 
 	};
 	Application* CreateApplication();
